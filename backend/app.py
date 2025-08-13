@@ -200,42 +200,6 @@ def get_motivational_message():
         return jsonify({'error': 'No se pudo obtener un mensaje en este momento. Inténtalo de nuevo.'}), 500
 
 
-# --- NUEVA RUTA PARA EL GENERADOR DE ÍCONOS ---
-@app.route('/generate-icon', methods=['POST'])
-def generate_icon():
-    """
-    Genera un ícono SVG basado en una descripción de texto enviada por el usuario.
-    """
-    try:
-        # Obtenemos la descripción del ícono del JSON enviado por el frontend
-        user_prompt = request.json.get('description')
-
-        if not user_prompt:
-            return jsonify({'error': 'No se proporcionó una descripción.'}), 400
-
-        model = genai.GenerativeModel('gemini-1.5-flash-latest')
-
-        # Este prompt es clave. Le pedimos a la IA que solo devuelva el código.
-        prompt = f"""
-        Genera el código para un ícono SVG simple, minimalista y de un solo color (negro) que represente '{user_prompt}'.
-        Requisitos estrictos:
-        1.  El SVG debe tener un `viewBox="0 0 24 24"`.
-        2.  El código debe ser completo, empezando con `<svg...` y terminando con `</svg>`.
-        3.  No incluyas NINGÚN texto, explicación o markdown antes o después del código SVG. La respuesta debe ser únicamente el código.
-        """
-        
-        response = model.generate_content(prompt)
-        
-        # Limpiamos la respuesta para asegurarnos de que solo es el SVG
-        svg_code = response.text.strip().replace("```svg", "").replace("```", "")
-
-        return jsonify({'svg_code': svg_code})
-
-    except Exception as e:
-        print(f"Error al generar el ícono: {e}")
-        return jsonify({'error': 'No se pudo generar el ícono.'}), 500
-
-
 if __name__ == '__main__':
     init_db(app)
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)

@@ -2,6 +2,8 @@ const frames = [
   '/static/hearts.png',
   '/static/hearts.png',
   '/static/hearts.png',
+  '/static/hearts.png',
+  '/static/hearts.png',
 ];
 
 let currentFrame = 0;

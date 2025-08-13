@@ -224,3 +224,79 @@ p a:hover {
     outline: 1px solid red !important;
   }
     */
+
+.task-container {
+  background-color: var(--my-green);
+  border-radius: 1rem;
+  padding: 2rem;
+  height: 100%;}
+
+.aside-container {
+background-color :var(--my-blue)!important;
+border-radius: 1rem;
+padding: 2rem;
+height: 100%;
+}
+
+.motivation-box {
+  background-color: c;
+  color: #664d03;
+  border: 1px solid #ffecb5;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  }
+
+
+  .btn.btn-primary {
+  background-color: var(--my-black);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--my-orange);
+  }
+}
+
+
+.btn.btn-success {
+  background-color: var(--my-green);
+  color: var(--my-black);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--my-orange);
+  }
+}
+
+.btn.btn-warning {
+  background-color: var(--my-blue);
+  color: var(--my-black);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--my-orange);
+  }
+}
+
+.btn.btn-danger {
+  background-color: var(--my-orange);
+  color: var(--my-black);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--my-orange);
+  }
+}
