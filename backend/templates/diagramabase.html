@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Entidad-Relación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .entity-box {
+            border: 2px solid #073B4C;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            padding: 1rem;
+            width: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .entity-box h3 {
+            font-weight: 700;
+            color: #073B4C;
+            border-bottom: 2px solid #FFD166;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .relationship-line {
+            width: 100px;
+            height: 2px;
+            background-color: #FF6B6B;
+            margin: 0 1rem;
+        }
+        .fk-pk-label {
+            font-weight: 600;
+            color: #118AB2;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="flex flex-col items-center">
+        <!-- Relación de Muchos a Muchos: Users y Mascotas -->
+        <div class="flex flex-col items-center mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Relación Muchos a Muchos</h2>
+            <div class="flex items-center justify-center gap-8">
+                <!-- Tabla Users -->
+                <div class="entity-box">
+                    <h3>users</h3>
+                    <ul>
+                        <li><span class="fk-pk-label">id</span> (PK)</li>
+                        <li>email</li>
+                        <li>username</li>
+                        <li>password</li>
+                    </ul>
+                </div>
+                <!-- Línea de relación -->
+                <div class="flex flex-col items-center">
+                    <p class="text-xs font-semibold text-gray-600 mb-1">1:N</p>
+                    <div class="relationship-line"></div>
+                </div>
+                <!-- Tabla User_mascotas (Tabla de Unión) -->
+                <div class="entity-box">
+                    <h3>user_mascotas</h3>
+                    <ul>
+                        <li><span class="fk-pk-label">user_id</span> (FK)</li>
+                        <li><span class="fk-pk-label">mascota_id</span> (FK)</li>
+                    </ul>
+                </div>
+                <!-- Línea de relación -->
+                <div class="flex flex-col items-center">
+                    <p class="text-xs font-semibold text-gray-600 mb-1">N:1</p>
+                    <div class="relationship-line"></div>
+                </div>
+                <!-- Tabla Mascotas -->
+                <div class="entity-box">
+                    <h3>mascotas</h3>
+                    <ul>
+                        <li><span class="fk-pk-label">id</span> (PK)</li>
+                        <li>name</li>
+                        <li>image</li>
+                        <li>mood</li>
+                        <li>vidas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full h-8 border-b-2 border-gray-400 my-8"></div>
+
+        <!-- Relación de Uno a Muchos: Users y Messages -->
+        <div class="flex flex-col items-center">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Relación Uno a Muchos</h2>
+            <div class="flex items-center justify-center gap-8">
+                <!-- Tabla Users -->
+                <div class="entity-box">
+                    <h3>users</h3>
+                    <ul>
+                        <li><span class="fk-pk-label">id</span> (PK)</li>
+                        <li>email</li>
+                        <li>username</li>
+                        <li>password</li>
+                    </ul>
+                </div>
+                <!-- Línea de relación -->
+                <div class="flex flex-col items-center">
+                    <p class="text-xs font-semibold text-gray-600 mb-1">1:N</p>
+                    <div class="relationship-line"></div>
+                </div>
+                <!-- Tabla Messages -->
+                <div class="entity-box">
+                    <h3>messages</h3>
+                    <ul>
+                        <li><span class="fk-pk-label">id</span> (PK)</li>
+                        <li><span class="fk-pk-label">user_id</span> (FK)</li>
+                        <li>content</li>
+                        <li>completed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

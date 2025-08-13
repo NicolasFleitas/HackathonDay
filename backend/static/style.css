@@ -1,0 +1,226 @@
+:root {
+  --my-orange: #FA7305;
+  --my-green: #81a7b3;
+  --my-blue: #ABE2F4;
+  --my-black: #424241;
+}
+
+body {
+  background-color: #ABE2F4 !important;
+  margin: 0; /* removes default body margin that can cause gaps */
+  min-height: 100vh; /* ensures body fills full viewport height */
+}
+
+main {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  background-color: #ABE2F4;
+  padding: 20px;
+  border-radius: 8px; /* optional, for nicer edges */
+  }
+  header {
+
+    background-color: #424241!important; 
+  }
+  
+  article {
+    flex: 2;
+    padding: 80px; /* adds breathing room inside the article */
+    line-height: 1.6; /* improves readability */
+    background-color:#ABE2F4; /* optional: keeps text area clean */
+    box-sizing: border-box;
+  }
+  article p {
+    margin-bottom: 1.2em;
+  }
+  
+  
+  aside {
+    flex: 1;
+    background-color:#ABE2F4;
+    padding: 50px;
+    box-sizing: border-box;
+  }
+  
+  aside img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; /* optional for softer look */
+  }
+ 
+  footer {
+    background-color: #424241; /* dark gray from palette */
+    color: #5D9F96;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  footer nav a {
+    color: #ABE2F4; /* light blue from palette */
+    text-decoration: none; /* removes underline */
+    margin: 0 8px;
+    transition: color 0.3s ease;
+  }
+  
+  footer nav a:hover {
+    color: #FA7305; /* orange accent */
+  }
+  .navbar-brand {
+    color: var(--my-orange)!important;      /* Example: your orange color */
+    font-weight: bold;            /* Make it bold */
+    font-size: 1.5rem;            /* Adjust size */
+    text-transform: uppercase;    /* Optional: uppercase letters */
+    letter-spacing: 1px;          /* Optional: space between letters */
+    text-decoration: none;        /* Remove underline */
+    transition: color 0.3s ease;
+  }
+  
+  /* Navbar background to match footer */
+.navbar {
+    background-color:#424241!important;
+  }
+  
+  /* Navbar text color */
+  .navbar .nav-link {
+    color:#ABE2F4 !important; /* white default */
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover color */
+  .navbar .nav-link:hover {
+    color: #FA7305 !important; /* orange from palette */
+  }
+  /* Make the "Regístrate aquí" link orange */
+p a {
+  color: var(--my-blue);
+  text-decoration: none; /* optional, removes underline */
+}
+
+p a:hover {
+  text-decoration: underline; /* optional, underline on hover */
+}
+
+  .asistente-box {
+    background-color: #FA7305; /* teal from your palette */
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* stack text and button */
+    align-items: center; /* center horizontally */
+    text-align: center; /* center text */
+    gap: 15px;
+  }
+  
+  .asistente-box button {
+    background-color: black; /* orange accent */
+    color:white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .asistente-box button:hover {
+    background-color:black; /* light blue */
+    color: #ABE2F4; /* dark text for contrast */
+  }
+  #inputMessage {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+    background: #424241 ;
+    color: #ABE2F4; /* This makes typed text blue */
+  }
+  #inputMessage::placeholder {
+    color: #ABE2F4;
+  }
+
+  
+  #messagesContainer {
+    /* max-width: 500px; */
+    margin: 20px auto;
+    padding: 10px;
+    background: transparent;
+    border-radius: 8px;
+    
+    transition: background-color 0.3s ease;
+  }
+  
+  /* When it has child elements (messages), apply background */
+  /* #messagesContainer:not(:empty) {
+    background: #81a7b3;
+  } */
+  
+  
+  #messagesContainer p {
+    margin: 10px 0 5px 0;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  #messagesContainer img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  
+  #heartscontainers img {
+    display: inline-block;  /* or 'inline' */
+    margin-right: 8px;      /* space between hearts */
+    vertical-align: middle; /* aligns them nicely */
+  }
+  
+  .content-area {
+    background-color: #ABE2F4;
+    padding: 4%;
+    border-radius: 8px;
+    padding-left: 20px;  /* match the horizontal spacing of the boxes */
+    padding-right: 20px;
+  }
+  
+  .orange-card {
+    background-color: var(--my-green) !important;
+    color: #424241;
+  }
+
+  .btn-custom {
+    background-color: #424241;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+    background-color: #424241 ; 
+    color :var(--my-blue);
+}
+
+                /* Estilo para el textarea donde se mostrará el mensaje */
+#motivationalMessage {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #333;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  resize: none; /* Evita que el usuario cambie el tamaño */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  text-align: center;
+}
+  
+ /* * {
+    outline: 1px solid red !important;
+  }
+    */

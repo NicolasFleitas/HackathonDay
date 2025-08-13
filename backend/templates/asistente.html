@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Página de bienvenida</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <!-- Enlace a los iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Estilos adicionales para mejorar la visualización */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Color de fondo ligero */
+        }
+        .main-container {
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #e9ecef; /* Damos un fondo al contenedor padre */
+            padding: 1rem;
+        }
+        .aside-container {
+            background-color: #e9ecef;
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+        }
+        .task-container {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+        }
+        .motivation-box {
+            background-color: #fff3cd;
+            color: #664d03;
+            border: 1px solid #ffecb5;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+      
+
+        .scrollable-list {
+            max-height: 250px; /* Puedes ajustar esta altura como prefieras */
+            overflow-y: auto;
+            border: 1px solid #dee2e6; /* Borde gris claro */
+            border-radius: 0.5rem; /* Esquinas redondeadas */
+            padding: 1rem; /* Espaciado interno */
+        }
+        .task-divider {
+            border-bottom: 1px solid #dee2e6; /* Línea gris delgada */
+            padding-bottom: 8px; /* Espacio para que la línea no esté pegada al texto */
+            margin-bottom: 8px; /* Espacio entre las tareas */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Menú desplegable -->
+        <div class="collapse bg-body-tertiary" id="navbarToggleExternalContent" data-bs-theme="dark">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Menú</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('asistente') }}">Asistente</a>
+                            </li>
+                            {% if session.get('user_id') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('logout') }}">Cerrar sesión</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('login') }}">Iniciar sesión</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Barra de navegación con el botón del menú -->
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-4">
+        <!-- Contenedor principal con dos columnas -->
+        <div class="row g-4">
+            
+            <!-- =================================== -->
+            <!--   PANEL LATERAL (MASCOTA Y ESTADO)  -->
+            <!-- =================================== -->
+            <aside class="col-12 col-lg-3">
+                <div class="aside-container text-center">
+                    <img src="../static/bigpengu.png" alt="pinguino" class="img-fluid mb-3" />
+                    <h4 class="mb-4">Hola, {{ username }}</h4>
+                    <h5>Vidas de pengu</h5>
+                    <div id="heartscontainers" class="d-flex justify-content-center gap-2 mb-3">
+                        <!-- Los corazones se renderizarán aquí con JavaScript -->
+                    </div>
+                    <button id="deleteCompletedBtn" class="btn btn-danger w-100">Eliminar tareas completadas</button>
+                </div>
+            </aside>
+
+            <!-- =================================== -->
+            <!--   PANEL PRINCIPAL (TAREAS)        -->
+            <!-- =================================== -->
+            <div class="col-12 col-lg-9">
+                <div class="task-container">
+                
+                    <h2 class="text-center mb-4">Mis Tareas</h2>
+
+                    <!-- MENSAJE MOTIVACIONAL -->
+                    <div class="motivation-box mb-4">
+                        <textarea id="motivationalMessage" class="form-control" rows="1" readonly></textarea>
+                    </div>
+
+                    <!-- FORMULARIO PARA AGREGAR TAREA -->
+                    <form id="taskForm" class="d-flex align-items-center gap-2 mb-4">
+                        <input type="text" id="inputMessage" placeholder="Agrega una pengu tarea" class="form-control" />
+                        <button id="mybutton" type="submit" class="btn btn-primary">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </button>
+                    </form>
+
+                    <!-- LISTAS DE TAREAS -->
+                    <h4 class="mb-3">Pendientes</h4>
+                    <div id="messagesContainer" class="mb-5 scrollable-list">
+                        <!-- Las tareas pendientes se renderizarán aquí -->
+                        <!-- Ejemplo de cómo debería ser la estructura de cada tarea: -->
+                        <!--
+                        <div class="d-flex justify-content-between align-items-center bg-light p-2 rounded mb-2">
+                            <span>Texto de la tarea</span>
+                            <div class="btn-group gap-1">
+                                <button class="btn btn-success btn-sm"><i class="bi bi-check-circle-fill"></i></button>
+                                <button class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+
+                    <h4 class="mb-3">Completadas</h4>
+                    <div id="completedTasksContainer" class="scrollable-list">
+                        <!-- Las tareas completadas se renderizarán aquí -->
+                        <!-- Ejemplo de cómo debería ser la estructura de cada tarea completada: -->
+                        <!--
+                        <div class="d-flex justify-content-between align-items-center bg-light p-2 rounded mb-2 completed-task">
+                            <span>Texto de la tarea completada</span>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+     
+    <footer class="text-center mt-5">
+        <p>&copy; 2025 Estrategias Lúdicas para Estudiar. Todos los derechos reservados.</p>
+        <nav>
+            <a href="#inicio">Inicio</a> |
+            <a href="#contacto">Contacto</a> |
+            <a href="#recursos">Recursos</a>
+        </nav>
+        <small>Imagen generada con IA y recursos educativos de libre uso.</small>
+    </footer>
+    
+    <!-- Scripts de Bootstrap y custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="../static/script.js"></script>
+    <script src="../static/scriptgemini.js"></script>
+</body>
+</html>

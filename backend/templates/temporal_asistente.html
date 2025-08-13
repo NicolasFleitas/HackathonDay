@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pagina de bienvenida</title>
+        <link rel="stylesheet" href="../static/style.css">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    </head>
+    <body>
+      <header>
+        <!-- Collapsible menu content -->
+        <div class="collapse bg-body-tertiary" id="navbarToggleExternalContent" data-bs-theme="dark">
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Menú</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+      
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('asistente') }}">Asistente</a>
+                  </li>
+      
+                  {% if session.get('user_id') %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Cerrar sesión</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Iniciar sesión</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      
+        <!-- Navbar with toggler button -->
+        <nav class="navbar navbar-dark bg-dark">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarToggleExternalContent"
+              aria-controls="navbarToggleExternalContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </nav>
+      </header>
+      
+        <main class="container my-4">
+          
+          <div class="row">
+            <h1>Hola, {{ username }}! Bienvenido al asistente.</h1>
+            <h3>Lista de Tareas</h3>
+              <h4>Cada vez que completes una tarea, pengu gana vida!</h4>
+            <div class="col-12 mb-4">
+              <div class="motivation-box p-3 bg-light rounded">
+                <textarea id="motivationalMessage" class="form-control" rows="1" readonly></textarea>
+              </div>
+            </div>
+            <aside class="col-12 col-md-4 mb-4">
+              <img src="../static/bigpengu.png" alt="pinguino" class="img-fluid" />
+              <h5>Vidas de pengu</h5>
+              <div id="heartscontainers"></div>
+              <button id="deleteCompletedBtn">Eliminar todas tareas completadas</button>
+
+            </aside>
+        
+            <div class="content-area col-12 col-md-8">
+              
+              <form id="taskForm" class="d-flex gap-2 mb-3">
+                <input type="text" id="inputMessage" placeholder="Agrega una pengu tarea" class="form-control" />
+                <!-- <button id="mybutton" type="submit" class="btn btn-primary">
+                  Agregar
+                </button> -->
+              </form>
+              <div id="messagesContainer"></div>
+              <h4>Tareas Completadas</h4>
+             <div id="completedTasksContainer"></div>
+  
+            </div>
+            </div>
+          
+        </main>
+      
+     
+        <footer>
+          <p>&copy; 2025 Estrategias Lúdicas para Estudiar. Todos los derechos reservados.</p>
+          <nav>
+            <a href="#inicio">Inicio</a> |
+            <a href="#contacto">Contacto</a> |
+            <a href="#recursos">Recursos</a>
+          </nav>
+          <small>Imagen generada con IA y recursos educativos de libre uso.</small>
+        </footer>
+        <!-- <script src="" async defer></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+        <script src="../static/script.js"></script>
+        <script src="../static/scriptgemini.js"></script>
+    </body>
+</html>
